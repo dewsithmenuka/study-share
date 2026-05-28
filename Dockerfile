@@ -30,11 +30,11 @@ RUN mkdir -p storage/logs/storage/framework/cache/sessions/framework/views \
     && touch storage/logs/.gitignore
 
 # Clear all caches
-RUN php artisan optimize:clear \
-    && php artisan config:clear \
-    && php artisan cache:clear \
-    && php artisan view:clear \
-    && php artisan route:clear || true
+# Clear all caches
+RUN php artisan config:clear \
+    && php artisan config:cache \
+    && php artisan route:clear \
+    && php artisan route:cache || true
 
 # Cache Laravel configs
 RUN php artisan config:cache || true \
