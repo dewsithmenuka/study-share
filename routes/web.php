@@ -17,6 +17,15 @@ use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Student\ProfileController;
 use Inertia\Inertia;
 
+Route::get('/db-test', function () {
+    try {
+        DB::connection()->getPDO();
+        return 'Database connected!';
+    } catch (\Exception $e) {
+        return 'Database error: ' . $e->getMessage();
+    }
+});
+
 Route::get('/', function () {
     if (auth()->check()) {
         if (auth()->user()->hasRole('admin')) {
