@@ -23,9 +23,18 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # Just install Node modules (don't build)
 RUN npm install
 
-# Set storage permissions
-RUN chmod -R 775 storage bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache
+# Create necessary directories
+RUN mkdir -p storage/logs/storage/framework/cache/sessions/framework/views \
+    && chmod -R 775 storage bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && touch storage/logs/.gitignore
+
+# Clear all caches
+RUN php artisan optimize:clear \
+    && php artisan config:clear \
+    && php artisan cache:clear \
+    && php artisan view:clear \
+    && php artisan route:clear || true
 
 # Cache Laravel configs
 RUN php artisan config:cache || true \
