@@ -20,9 +20,8 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Install Node dependencies and build frontend (FORCE FRESH INSTALL)
-RUN rm -rf node_modules package-lock.json \
-    && npm install && npm run build
+# Just install Node modules (don't build)
+RUN npm install
 
 # Set storage permissions
 RUN chmod -R 775 storage bootstrap/cache \
