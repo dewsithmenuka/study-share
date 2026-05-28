@@ -1,11 +1,11 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 
-/** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: 'class', // FIX: enables .dark class-based dark mode
+    darkMode: 'class',
 
     content: [
+        './index.html',  // ADD THIS LINE
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
