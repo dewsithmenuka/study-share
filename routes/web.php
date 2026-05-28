@@ -27,6 +27,10 @@ Route::get('/', function () {
     return \Inertia\Inertia::render('Welcome');
 });
 
+Route::get('/test', function () {
+    return 'Laravel is working!';
+});
+// 
 // Student routes
 Route::middleware(['auth', 'role:student|admin'])->prefix('student')->name('student.')->group(function () {
     // Dashboard & Resources
