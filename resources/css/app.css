@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    input,
+    textarea,
+    select {
+        @apply text-gray-900;
+    }
+
+    .dark input,
+    .dark textarea,
+    .dark select {
+        @apply text-white;
+    }
+}
+
+/* Override @tailwindcss/forms plugin which resets input colors */
+.dark input:not([type='checkbox']):not([type='radio']),
+.dark textarea,
+.dark select {
+    color: white !important;
+}
+
+input:not([type='checkbox']):not([type='radio']),
+textarea,
+select {
+    color: #111827;
+}
