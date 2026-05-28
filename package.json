@@ -3,7 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "echo Build skipped - using pre-built assets",
+        "build": "vite build",
         "dev": "vite",
         "dev:all": "concurrently \"php artisan serve --port=8000\" \"vite\""
     },
