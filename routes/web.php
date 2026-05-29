@@ -15,36 +15,12 @@ use App\Http\Controllers\Student\PomodoroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Student\ProfileController;
-use Inertia\Inertia;
 
-Route::get('/db-test', function () {
-    try {
-        DB::connection()->getPDO();
-        return 'Database connected!';
-    } catch (\Exception $e) {
-        return 'Database error: ' . $e->getMessage();
-    }
-});
-
+// Landing page - show the static Blade page
 Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/', function () {
-    if (auth()->check()) {
-        if (auth()->user()->hasRole('admin')) {
-            return redirect()->route('admin.dashboard');
-        }
-        return redirect()->route('student.dashboard');
-    }
-    // Use simple Blade instead of Inertia
-    return view('welcome');
-});
-
-Route::get('/test', function () {
-    return 'Laravel is working!';
-});
-// 
 // Student routes
 Route::middleware(['auth', 'role:student|admin'])->prefix('student')->name('student.')->group(function () {
     // Dashboard & Resources
