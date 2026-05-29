@@ -3,9 +3,9 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
         "dev": "vite",
-        "dev:all": "concurrently \"php artisan serve --port=8000\" \"vite\""
+        "build": "vite build && cp index.html dist/",
+        "preview": "vite preview"
     },
     "devDependencies": {
         "@headlessui/react": "^2.0.0",
