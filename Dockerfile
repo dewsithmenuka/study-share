@@ -23,7 +23,8 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Just install Node modules (NO BUILD!)
-RUN npm install
+# Build frontend assets
+RUN npm install && npm run build
 
 # Create necessary directories
 RUN mkdir -p storage/logs/storage/framework/cache/sessions/framework/views \

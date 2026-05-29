@@ -1,15 +1,19 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';  // ADD THIS
 
 export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/js/app.jsx'],
-            refresh: true,
+            refresh: ['resources/js/**'],
         }),
         react(),
-        tailwindcss(),  // ADD THIS
     ],
+    build: {
+        outDir: 'public/build',
+        rollupOptions: {
+            input: 'resources/js/app.jsx',
+        },
+    },
 });
