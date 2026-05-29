@@ -5,8 +5,10 @@ RUN apt-get update && apt-get install -y \
     git curl zip unzip nodejs npm \
     libzip-dev libpng-dev libonig-dev \
     libxml2-dev libcurl4-openssl-dev \
+    libpq-dev \
     && docker-php-ext-install \
-    pdo pdo_mysql mbstring zip exif pcntl bcmath gd curl
+    pdo pdo_mysql mbstring zip exif pcntl bcmath gd curl \
+    pdo_pgsql pgsql
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
