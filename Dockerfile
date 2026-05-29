@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     pdo pdo_mysql mbstring zip exif pcntl bcmath gd curl \
     pdo_pgsql pgsql
 
+RUN php artisan config:clear && php artisan cache:clear    
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
