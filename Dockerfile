@@ -20,7 +20,7 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Just install Node modules (no build!)
+# Just install Node modules (NO BUILD!)
 RUN npm install
 
 # Create necessary directories
