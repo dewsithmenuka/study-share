@@ -20,8 +20,11 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Just install Node modules (don't build)
+# Install Node modules
 RUN npm install
+
+# Build the frontend assets
+RUN npm run build
 
 # Create necessary directories
 RUN mkdir -p storage/logs/storage/framework/cache/sessions/framework/views \
@@ -30,11 +33,7 @@ RUN mkdir -p storage/logs/storage/framework/cache/sessions/framework/views \
     && touch storage/logs/.gitignore
 
 # Clear all caches
-# Clear all caches
-RUN php artisan config:clear \
-    && php artisan config:cache \
-    && php artisan route:clear \
-    && php artisan route:cache || true
+RUN php artisan optimize:clear || true
 
 # Cache Laravel configs
 RUN php artisan config:cache || true \
