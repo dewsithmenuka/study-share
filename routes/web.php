@@ -33,7 +33,8 @@ Route::get('/', function () {
         }
         return redirect()->route('student.dashboard');
     }
-    return \Inertia\Inertia::render('Welcome');
+    // Use simple Blade instead of Inertia
+    return view('welcome');
 });
 
 Route::get('/test', function () {
