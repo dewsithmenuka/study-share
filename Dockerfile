@@ -10,23 +10,20 @@ RUN apt-get update && apt-get install -y \
     pdo pdo_mysql mbstring zip exif pcntl bcmath gd curl \
     pdo_pgsql pgsql
 
-RUN php artisan config:clear && php artisan cache:clear    
-
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www
 
-# Copy all project files
+# Copy all project files FIRST
 COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Just install Node modules (NO BUILD!)
-# Build frontend assets
-RUN npm install && npm run build
+RUN npm install
 
 # Create necessary directories
 RUN mkdir -p storage/logs/storage/framework/cache/sessions/framework/views \
@@ -34,8 +31,9 @@ RUN mkdir -p storage/logs/storage/framework/cache/sessions/framework/views \
     && chown -R www-data:www-data storage bootstrap/cache \
     && touch storage/logs/.gitignore
 
-# Clear all caches
-RUN php artisan optimize:clear || true
+# Clear caches AFTER copying files
+RUN php artisan config:clear || true
+RUN php artisan cache:clear || true
 
 EXPOSE 10000
 
