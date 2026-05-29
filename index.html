@@ -5,18 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyShare</title>
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
+    <style>
+        #app { min-height: 100vh; font-family: figtree, sans-serif; }
+        .loading { padding: 50px; text-align: center; }
+    </style>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <div class="loading">📚<br><h1>StudyShare</h1><p>Loading...</p></div>
+    </div>
     <script type="module">
-        // Try to load with dynamic import - this finds any app-*.js file
-        const appFiles = ['app-DFR-xPtY.js', 'app.js', 'main.js'];
-        for (const file of appFiles) {
+        // Load from Vite manifest
+        async function loadApp() {
             try {
-                await import('/dist/assets/' + file);
-                break;
-            } catch(e) { continue; }
+                const manifest = await fetch('/dist/manifest.json').then(r => r.json());
+                const entry = manifest['resources/js/app.jsx'];
+                if (entry && entry.file) {
+                    await import('/dist/' + entry.file);
+                } else {
+                    // Fallback: try common patterns
+                    const files = ['app-DFR-xPtY.js', 'app.js', 'main.js'];
+                    for (const f of files) {
+                        try {
+                            await import('/dist/assets/' + f);
+                            break;
+                        } catch(e) {}
+                    }
+                }
+            } catch(e) {
+                console.error('Failed to load app:', e);
+            }
         }
+        loadApp();
     </script>
 </body>
 </html>
