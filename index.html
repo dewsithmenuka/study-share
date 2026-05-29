@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Share</title>
-    @viteReactRefresh
-    @vite('resources/js/app.jsx')
+    <title>StudyShare</title>
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Figtree', sans-serif; }
+    </style>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <!-- Static fallback while React loads -->
+        <div style="text-align:center; padding:50px;">
+            <h1>📚 StudyShare</h1>
+            <p>Loading...</p>
+        </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

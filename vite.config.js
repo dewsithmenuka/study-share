@@ -4,20 +4,18 @@ import path from 'path';
 
 export default defineConfig({
     plugins: [react()],
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'resources/js'),
+        },
+    },
     build: {
         outDir: 'dist',
         emptyOutDir: true,
         rollupOptions: {
-            input: path.resolve(__dirname, 'resources/js/app.jsx'),
-            output: {
-                entryFileNames: 'assets/index.js',
-                assetFileNames: 'assets/[name][extname]',
+            input: {
+                main: path.resolve(__dirname, 'index.html'),
             },
-        },
-    },
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, 'resources/js'),
         },
     },
 });
