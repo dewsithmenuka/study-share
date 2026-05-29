@@ -5,15 +5,14 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/js/app.jsx'],
-            refresh: ['resources/js/**'],
+            input: 'resources/js/app.jsx',
+            buildDirectory: 'build',
+            refresh: true,
         }),
         react(),
     ],
     build: {
-        outDir: 'public/build',
-        rollupOptions: {
-            input: 'resources/js/app.jsx',
-        },
+        target: 'esnext',
+        minify: false,
     },
 });
