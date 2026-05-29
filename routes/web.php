@@ -27,6 +27,10 @@ Route::get('/db-test', function () {
 });
 
 Route::get('/', function () {
+    return view('landing');
+});
+
+Route::get('/', function () {
     if (auth()->check()) {
         if (auth()->user()->hasRole('admin')) {
             return redirect()->route('admin.dashboard');
