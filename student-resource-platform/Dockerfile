@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM php:8.4-fpm
 
 # Install dependencies (Added libicu-dev for common laravel needs)
 RUN apt-get update && apt-get install -y \
@@ -20,5 +20,6 @@ RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 EXPOSE 10000
 
 # We moved the migrate command to the Render Start Command
-CMD php artisan serve --host=0.0.0.0 --port=8000
-CMD php artisan migrate --force
+EXPOSE 10000
+
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
