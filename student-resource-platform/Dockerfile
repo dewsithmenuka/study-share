@@ -47,4 +47,4 @@ RUN chmod -R 775 storage bootstrap/cache
 EXPOSE 8080
 
 # Run migrations then start Laravel
-CMD ["sh", "-c", "php artisan migrate --force && php -S 0.0.0.0:${PORT:-8080} -t public"]
+CMD ["sh", "-c", "echo PORT=$PORT && php artisan migrate --force && php -S 0.0.0.0:${PORT:-8080} -t public"]
