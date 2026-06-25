@@ -9,11 +9,9 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('resource_files', function (Blueprint $table) {
-            // 'private', 'pending', 'public'
-            $table->string('visibility')->default('private');
             $table->index(['title', 'semester']);
         });
     }
@@ -24,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('resource_files', function (Blueprint $table) {
-            //
+            $table->dropIndex(['title', 'semester']);
         });
     }
 };
