@@ -6,32 +6,25 @@ import path from 'path';
 export default defineConfig({
     plugins: [
         laravel({
-            input: [
-                'resources/css/app.css',
-                'resources/js/app.jsx',
-            ],
-            refresh: true,
+            input: 'resources/js/app.jsx',
+            refresh: ['resources/js/**'],
         }),
         react(),
     ],
-
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'),
+            '@laravel-vite-plugin': path.resolve(__dirname, 'node_modules/laravel-vite-plugin'),
         },
     },
-
-    server: {
-        host: '127.0.0.1',
-        port: 5173,
-        strictPort: true,
+    build: {
+        outDir: 'dist',
+        emptyOutDir: true,
+        rollupOptions: {
+            input: 'resources/js/app.jsx',
+        },
     },
-
     optimizeDeps: {
-        include: [
-            'react',
-            'react-dom',
-            '@inertiajs/react',
-        ],
+        include: ['react', 'react-dom', '@inertiajs/react'],
     },
 });
